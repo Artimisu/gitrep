@@ -157,7 +157,9 @@ def test(target_domain, source_domains, test_dloader_list, model_list, classifie
     tmp_score = torch.cat(tmp_score, dim=0).detach()
     tmp_label = torch.cat(tmp_label, dim=0).detach()
     _, y_true = torch.topk(tmp_label, k=1, dim=1)
-    _, y_pred = torch.topk(tmp_score, k=5, dim=1)
+    #change: here i change the number of k because in dim1 there is only 2 lines, same as lables tensor.
+    #_, y_pred = torch.topk(tmp_score, k=5, dim=1)
+    _, y_pred = torch.topk(tmp_score, k=1, dim=1)
     top_1_accuracy_t = float(torch.sum(y_true == y_pred[:, :1]).item()) / y_true.size(0)
     writer.add_scalar(tag="Test/target_domain_{}_accuracy_top1".format(target_domain).format(target_domain),
                       scalar_value=top_1_accuracy_t,
@@ -192,7 +194,9 @@ def test(target_domain, source_domains, test_dloader_list, model_list, classifie
         tmp_score = torch.cat(tmp_score, dim=0).detach()
         tmp_label = torch.cat(tmp_label, dim=0).detach()
         _, y_true = torch.topk(tmp_label, k=1, dim=1)
-        _, y_pred = torch.topk(tmp_score, k=5, dim=1)
+        #change: here i change the number of k because in dim1 there is only 2 lines, same as lables tensor.
+        #_, y_pred = torch.topk(tmp_score, k=5, dim=1)
+        _, y_pred = torch.topk(tmp_score, k=1, dim=1)
         top_1_accuracy_s = float(torch.sum(y_true == y_pred[:, :1]).item()) / y_true.size(0)
         writer.add_scalar(tag="Test/source_domain_{}_accuracy_top1".format(domain_s), scalar_value=top_1_accuracy_s,
                           global_step=epoch + 1)

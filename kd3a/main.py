@@ -46,7 +46,7 @@ parser.add_argument('--optimizer', default="SGD", type=str, metavar="Optimizer N
 parser.add_argument('-m', '--momentum', default=0.9, type=float, metavar='M', help='Momentum in SGD')
 parser.add_argument('--wd', '--weight-decay', default=5e-4, type=float)
 parser.add_argument('-bm', '--bn-momentum', type=float, default=0.1, help="the batchnorm momentum parameter")
-parser.add_argument("--gpu", default="0", type=str, metavar='GPU plans to use', help='The GPU id plans to use')
+parser.add_argument("--gpu", default="1,2,3,4", type=str, metavar='GPU plans to use', help='The GPU id plans to use')
 args = parser.parse_args()
 # import config files
 with open(r"./config/{}".format(args.config)) as file:
@@ -270,7 +270,6 @@ def main(args=args, configs=configs):
                                "train_time:{}".format(args.train_time) + "_" +
                                args.target_domain + "_" + "_".join(args.source_domains))
     print("create writer in {}".format(writer_log_dir))
-    ipdb.set_trace()
     if os.path.exists(writer_log_dir):
         flag = input("{} train_time:{} will be removed, input yes to continue:".format(
             configs["DataConfig"]["dataset"], args.train_time))
