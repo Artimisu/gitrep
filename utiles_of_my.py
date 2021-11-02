@@ -4,6 +4,7 @@ import ipdb
 import toch.nn as nn
 
 def load_image(image):
+    
 
 
 def images_fuse(image1,image2):
@@ -28,4 +29,4 @@ def show_feature(feature_tensor):
 
 
 def save_feature_as_image(feature_tensor):
-    
+
