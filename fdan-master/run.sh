@@ -1,0 +1,1 @@
+python main.py --config AmazonReview.yaml --target-domain books
